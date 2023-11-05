@@ -12,9 +12,10 @@ import characters from '@/data/characters.json'
 import qoutes from '@/data/qoutes.json'
 import { NextResponse } from 'next/server'
 
-export async function GET(req, { params }) {
+export async function GET(req) {
   try {
-    const character = characters.data.find(item => item.slug === params.slug)
+    const characterSlug = req.params.slug;
+    const character = characters.data.find(item => item.slug === characterSlug);
 
     if (!character) {
       return new NextResponse('not found', { status: 404 })
